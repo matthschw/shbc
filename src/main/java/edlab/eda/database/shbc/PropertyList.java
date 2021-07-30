@@ -1,10 +1,18 @@
 package edlab.eda.database.shbc;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+
 public class PropertyList extends SimpleProperty
     implements Iterable<SimpleProperty> {
+
+  public static final String TYPE_ID = "list";
+  public static final String ENTRY_ID = "entry";
+
   private ArrayList<SimpleProperty> properties;
 
   public PropertyList() {
@@ -37,5 +45,46 @@ public class PropertyList extends SimpleProperty
 
   public Iterator<SimpleProperty> iterator() {
     return properties.iterator();
+  }
+
+  public boolean equal(Object o) {
+
+    if (o instanceof PropertyList) {
+      PropertyList propertyList = (PropertyList) o;
+
+      if (this.properties.size() != propertyList.properties.size()) {
+        return false;
+      }
+
+      for (int i = 0; i < this.properties.size(); i++) {
+
+        if (!this.properties.get(i).equals(propertyList.properties.get(i))) {
+          return false;
+        }
+      }
+
+      return true;
+
+    } else {
+      return false;
+    }
+  }
+
+  @Override
+  Element build(String name, Document document) {
+    
+    Element element = document.createElement(name);
+    element.setAttribute(Container.TYPE_ID, TYPE_ID);
+
+    for (SimpleProperty simpleProperty : this.properties) {
+      element.appendChild(simpleProperty.build(ENTRY_ID, document));
+    }
+    
+    return element;
+  }
+  
+  @Override
+  Element build(String name, Document document, File file) {
+    return build(name, document);
   }
 }
