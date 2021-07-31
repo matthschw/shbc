@@ -7,6 +7,8 @@ import org.w3c.dom.Element;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 
+import edlab.eda.database.shbc.exceptions.UnknownTypeException;
+
 /**
  * Property in the Container
  *
@@ -34,8 +36,9 @@ abstract public class Property {
    * @param node XML-Node
    * @param dir  Directory where the container is stored
    * @return Container Property
+   * @throws UnknownTypeException
    */
-  static Property build(Node node, File dir) {
+  static Property build(Node node, File dir) throws UnknownTypeException {
 
     NamedNodeMap map = node.getAttributes();
 
@@ -54,8 +57,11 @@ abstract public class Property {
 
         return DoubleMatrixProperty.build(node, dir);
       }
+
+      throw new UnknownTypeException(type);
+
     }
 
-    return null;
+    throw new UnknownTypeException(node);
   }
 }

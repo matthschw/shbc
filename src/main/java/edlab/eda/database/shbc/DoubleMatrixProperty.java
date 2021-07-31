@@ -64,6 +64,38 @@ public class DoubleMatrixProperty extends MatrixProperty {
   }
 
   /**
+   * Convert the DoubleMatrixProperty to a 4-dimensional double array
+   * 
+   * @return 4-dimensional double array
+   */
+  public double[][][][] convertTo4D() {
+
+    if (getDimenions() == 4) {
+
+      double[][][][] retval = new double[this.dimensions[0]][this.dimensions[1]][this.dimensions[2]][this.dimensions[3]];
+
+      for (int i = 0; i < dimensions[0]; i++) {
+        for (int j = 0; j < dimensions[1]; j++) {
+          for (int k = 0; k < dimensions[2]; k++) {
+            for (int l = 0; l < dimensions[3]; l++) {
+
+              retval[i][j][k][l] = this.values[this.dimensions[3]
+                  * this.dimensions[2] * this.dimensions[1] * i
+                  + this.dimensions[3] * this.dimensions[2] * j
+                  + this.dimensions[3] * k + l];
+            }
+          }
+        }
+      }
+
+      return retval;
+
+    } else {
+      return new double[0][0][0][0];
+    }
+  }
+
+  /**
    * Create a DoubleMatrixProperty from 3-dimensional double array
    * 
    * @param data 3-dimensional double array
@@ -91,6 +123,34 @@ public class DoubleMatrixProperty extends MatrixProperty {
   }
 
   /**
+   * Convert the DoubleMatrixProperty to a 3-dimensional double array
+   * 
+   * @return 3-dimensional double array
+   */
+  public double[][][] convertTo3D() {
+
+    if (getDimenions() == 3) {
+
+      double[][][] retval = new double[this.dimensions[0]][this.dimensions[1]][this.dimensions[2]];
+
+      for (int i = 0; i < dimensions[0]; i++) {
+        for (int j = 0; j < dimensions[1]; j++) {
+          for (int k = 0; k < dimensions[2]; k++) {
+
+            retval[i][j][k] = this.values[this.dimensions[2]
+                * this.dimensions[1] * i + this.dimensions[2] * j + k];
+          }
+        }
+      }
+
+      return retval;
+
+    } else {
+      return new double[0][0][0];
+    }
+  }
+
+  /**
    * Create a DoubleMatrixProperty from 2-dimensional double array
    * 
    * @param data 2-dimensional double array
@@ -111,6 +171,31 @@ public class DoubleMatrixProperty extends MatrixProperty {
   }
 
   /**
+   * Convert the DoubleMatrixProperty to a 2-dimensional double array
+   * 
+   * @return 2-dimensional double array
+   */
+  public double[][] convertTo2D() {
+
+    if (getDimenions() == 2) {
+
+      double[][] retval = new double[this.dimensions[0]][this.dimensions[1]];
+
+      for (int i = 0; i < dimensions[0]; i++) {
+        for (int j = 0; j < dimensions[1]; j++) {
+
+          retval[i][j] = this.values[this.dimensions[1] * i + j];
+        }
+      }
+
+      return retval;
+
+    } else {
+      return new double[0][0];
+    }
+  }
+
+  /**
    * Create a DoubleMatrixProperty from 1-dimensional double array
    * 
    * @param data 1-dimensional double array
@@ -119,6 +204,28 @@ public class DoubleMatrixProperty extends MatrixProperty {
   public static DoubleMatrixProperty create(double[] data) {
 
     return new DoubleMatrixProperty(new int[] { data.length }, data);
+  }
+
+  /**
+   * Convert the DoubleMatrixProperty to a 1-dimensional double array
+   * 
+   * @return 1-dimensional double array
+   */
+  public double[] convertTo1D() {
+
+    if (getDimenions() == 1) {
+
+      double[] retval = new double[this.dimensions[0]];
+
+      for (int i = 0; i < dimensions[0]; i++) {
+        retval[i] = this.values[i];
+      }
+
+      return retval;
+
+    } else {
+      return new double[0];
+    }
   }
 
   @Override
@@ -194,14 +301,14 @@ public class DoubleMatrixProperty extends MatrixProperty {
     }
   }
 
-  
   /**
    * Create a DoubleMatrixProperty from a XML-Node
+   * 
    * @param node XML-Node
    * @param file Directory where the data is stored
    * @return DoubleMatrixProperty
    */
-  static DoubleMatrixProperty build(Node node, File file) { 
+  static DoubleMatrixProperty build(Node node, File file) {
     ArrayList<Integer> dims = new ArrayList<>();
 
     NodeList nodeList = node.getChildNodes();

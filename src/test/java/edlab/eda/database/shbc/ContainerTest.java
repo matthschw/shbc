@@ -3,6 +3,7 @@ package edlab.eda.database.shbc;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.Random;
@@ -10,10 +11,13 @@ import java.util.Random;
 import org.apache.commons.io.FileUtils;
 import org.junit.jupiter.api.Test;
 
+import edlab.eda.database.shbc.exceptions.CorruptedContainerException;
+import edlab.eda.database.shbc.exceptions.UnknownTypeException;
+
 public class ContainerTest {
 
   @Test
-  void test() {
+  void test() throws FileNotFoundException, CorruptedContainerException, UnknownTypeException {
 
     File first = new File("./first");
     File second = new File("./second");

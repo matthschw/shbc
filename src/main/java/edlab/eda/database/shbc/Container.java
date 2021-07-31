@@ -1,6 +1,7 @@
 package edlab.eda.database.shbc;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -17,12 +18,16 @@ import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
 import org.apache.commons.io.FileUtils;
+import org.w3c.dom.DOMException;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
+
+import edlab.eda.database.shbc.exceptions.CorruptedContainerException;
+import edlab.eda.database.shbc.exceptions.UnknownTypeException;
 
 public class Container {
 
@@ -260,8 +265,12 @@ public class Container {
    * @param dir Directory on the hard disk where the container is saved
    * @return <code>true</code> if container was read successfully from the
    *         drive, <code>false</code> otherwise
+   * @throws CorruptedContainerException
+   * @throws FileNotFoundException
+   * @throws UnknownTypeException 
    */
-  public static Container read(File dir) {
+  public static Container read(File dir)
+      throws CorruptedContainerException, FileNotFoundException, UnknownTypeException {
 
     if (dir.isDirectory() && dir.canRead()) {
 
@@ -295,8 +304,13 @@ public class Container {
             if (map != null && map.getNamedItem(TYPE_ID) != null
                 && map.getNamedItem(NAME_ID) != null) {
 
-              properties.put(map.getNamedItem(NAME_ID).getTextContent(),
-                  Property.build(node, dir));
+              try {
+                properties.put(map.getNamedItem(NAME_ID).getTextContent(),
+                    Property.build(node, dir));
+              } catch (DOMException e) {
+                throw CorruptedContainerException
+                    .getCorruptedXMLException(config);
+              }
             }
           }
 
@@ -309,15 +323,15 @@ public class Container {
           return new Container(containers, properties);
 
         } catch (ParserConfigurationException e) {
-          return null;
+          throw CorruptedContainerException.getCorruptedXMLException(config);
         } catch (SAXException e) {
-          return null;
+          throw CorruptedContainerException.getCorruptedXMLException(config);
         } catch (IOException e) {
-          return null;
+          throw CorruptedContainerException.getCorruptedXMLException(config);
         }
 
       } else {
-        return null;
+        throw new FileNotFoundException(config.getAbsolutePath());
       }
     } else {
       return null;
