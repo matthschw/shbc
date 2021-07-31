@@ -10,42 +10,82 @@ import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+/**
+ * List of {@link SimpleProperty} objects
+ *
+ */
 public class PropertyList extends SimpleProperty
     implements Iterable<SimpleProperty> {
 
   static final String TYPE_ID = "list";
- 
 
   private ArrayList<SimpleProperty> properties;
 
+  /**
+   * Create an empty PropertyList
+   */
   public PropertyList() {
     this.properties = new ArrayList<SimpleProperty>();
   }
 
+  /**
+   * Create a PropertyList
+   * 
+   * @param properties List of {@link SimpleProperty}
+   */
   public PropertyList(ArrayList<SimpleProperty> properties) {
     this.properties = properties;
   }
 
+  /**
+   * Add a {@link SimpleProperty} as first list element
+   * 
+   * @param property Simple property to be added
+   */
   public void addFirst(SimpleProperty property) {
     this.properties.add(0, property);
   }
 
+  /**
+   * Add a {@link SimpleProperty} as last list element
+   * 
+   * @param property Simple property to be added
+   */
   public void addLast(SimpleProperty property) {
     this.properties.add(properties.size(), property);
   }
 
-  public void addLast(SimpleProperty property, int i) {
+  /**
+   * Add a {@link SimpleProperty} at a specific index
+   * 
+   * @param property Simple property to be added
+   * @param i        Index where the property is added
+   */
+  public void add(SimpleProperty property, int i) {
     this.properties.add(i, property);
   }
 
+  /**
+   * Remove a {@link SimpleProperty} from the list
+   * 
+   * @param property {@link SimpleProperty} to be removed
+   * @return <code>true</code> if property was removed successfully,
+   *         <code>false</code> otherwise
+   */
   public boolean remove(SimpleProperty property) {
     return this.properties.remove(property);
   }
 
+  /**
+   * Get number of added properties
+   * 
+   * @return Number of properties in the list
+   */
   public int getNumOfProperties() {
     return properties.size();
   }
 
+  @Override
   public Iterator<SimpleProperty> iterator() {
     return properties.iterator();
   }
@@ -92,11 +132,13 @@ public class PropertyList extends SimpleProperty
     return element;
   }
 
-  @Override
-  Element build(String name, Document document, File file) {
-    return build(name, document);
-  }
-
+  /**
+   * Create a PropertyList from a XML-Node
+   * 
+   * @param node XML-Node
+   * @param file Directory where the data is stored
+   * @return PropertyList
+   */
   static SimpleProperty build(Node node, File file) {
 
     PropertyList list = new PropertyList();

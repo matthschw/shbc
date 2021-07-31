@@ -36,14 +36,6 @@ import edlab.eda.database.shbc.*;
 The [JavaDoc](https://matthschw.github.io/shbc/)
 is stored on the Github-Pages (branch *gh-pages*).
 
-## Example
-
-```java
-// Create a new Container
-
-
-```
-
 ## License
 
 Copyright (C) 2021, [Electronics & Drives](https://www.electronics-and-drives.de/)

@@ -7,12 +7,34 @@ import org.w3c.dom.Element;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 
+/**
+ * Property in the Container
+ *
+ */
 abstract public class Property {
 
+  /**
+   * Check if two properties are equal
+   */
   public abstract boolean equals(Object o);
 
-  abstract Element build(String name, Document document, File file);
+  /**
+   * Create a XML-Element from a Container Property
+   * 
+   * @param name     Name of the XML-Node Element in the XML
+   * @param document XML-Document
+   * @param dir      Directory where the container is created
+   * @return XML-Element
+   */
+  abstract Element build(String name, Document document, File dir);
 
+  /**
+   * Create a Container Property from a XML-Node
+   * 
+   * @param node XML-Node
+   * @param dir  Directory where the container is stored
+   * @return Container Property
+   */
   static Property build(Node node, File dir) {
 
     NamedNodeMap map = node.getAttributes();
@@ -27,7 +49,7 @@ abstract public class Property {
 
         return SimpleProperty.build(node, dir);
       }
-      
+
       if (type.equals(DoubleMatrixProperty.TYPE_ID)) {
 
         return DoubleMatrixProperty.build(node, dir);

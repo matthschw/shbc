@@ -6,11 +6,19 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 
+/**
+ * String Container Property
+ */
 public class StringProperty extends SimpleProperty {
 
   static final String TYPE_ID = "string";
   private String property;
 
+  /**
+   * Create a StringProperty
+   * 
+   * @param property StringProperty
+   */
   public StringProperty(String property) {
     this.property = property;
   }
@@ -19,18 +27,20 @@ public class StringProperty extends SimpleProperty {
     return this.property;
   }
 
+  @Override
   public String toString() {
     return this.property.toString();
   }
 
+  @Override
   public boolean equals(Object o) {
 
     if (o instanceof StringProperty) {
-      
+
       StringProperty stringProperty = (StringProperty) o;
 
       return stringProperty.property.equals(this.property);
-      
+
     } else {
 
       return false;
@@ -52,11 +62,13 @@ public class StringProperty extends SimpleProperty {
     return element;
   }
 
-  @Override
-  Element build(String name, Document document, File file) {
-    return build(name, document);
-  }
-
+  /**
+   * Create a StringProperty from a XML-Node
+   * 
+   * @param node XML-Node
+   * @param file Directory where the data is stored
+   * @return StringProperty
+   */
   static SimpleProperty build(Node node, File file) {
     return new StringProperty(node.getTextContent());
   }

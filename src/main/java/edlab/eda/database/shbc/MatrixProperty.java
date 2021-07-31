@@ -1,12 +1,16 @@
 package edlab.eda.database.shbc;
 
+/**
+ * Matrix Container Property
+ *
+ */
 public abstract class MatrixProperty extends ComplexProperty {
-  
+
   static final String DIM_ID = "dim";
   protected int[] dimensions;
   protected int[] scalings = null;
 
-  public MatrixProperty(int[] dimensions) {
+  protected MatrixProperty(int[] dimensions) {
 
     this.dimensions = dimensions;
 
@@ -22,10 +26,18 @@ public abstract class MatrixProperty extends ComplexProperty {
     }
   }
 
+  /**
+   * Get the dimension of the matrix
+   * 
+   * @return Number of Dimensions
+   */
   public int getDimenions() {
     return dimensions.length;
   }
 
+  /**
+   * @hidden
+   */
   int getDatabaseIndex(int[] indices) {
 
     if (this.dimensions.length == indices.length) {
@@ -42,5 +54,4 @@ public abstract class MatrixProperty extends ComplexProperty {
       return -1;
     }
   }
-
 }

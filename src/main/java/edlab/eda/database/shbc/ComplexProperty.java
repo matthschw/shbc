@@ -1,5 +1,8 @@
 package edlab.eda.database.shbc;
 
-public abstract class ComplexProperty extends Property{
+/**
+ * Complex Container Property
+ */
+public abstract class ComplexProperty extends Property {
 
 }

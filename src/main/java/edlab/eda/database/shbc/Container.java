@@ -36,17 +36,31 @@ public class Container {
   private Map<String, Container> containers;
   private Map<String, Property> properties;
 
+  /**
+   * Create an empty container
+   */
   public Container() {
     this.properties = new HashMap<String, Property>();
     this.containers = new HashMap<String, Container>();
   }
 
+  /**
+   * @hidden
+   */
   private Container(Map<String, Container> containers,
       Map<String, Property> properties) {
     this.containers = containers;
     this.properties = properties;
   }
 
+  /**
+   * Add a property to a container
+   * 
+   * @param name     Name (Key) of the Property
+   * @param property Property to be added
+   * @return <code>true</code> if property was added successfully,
+   *         <code>false</code> otherwise
+   */
   public boolean addProperty(String name, Property property) {
 
     if (this.properties.keySet().contains(name)) {
@@ -57,6 +71,13 @@ public class Container {
     }
   }
 
+  /**
+   * Remove a property from a container
+   * 
+   * @param name Name (Key) of the Property
+   * @return <code>true</code> if property was removed successfully,
+   *         <code>false</code> otherwise
+   */
   public boolean removeProperty(String name) {
 
     if (this.containers.keySet().contains(name)) {
@@ -67,6 +88,14 @@ public class Container {
     }
   }
 
+  /**
+   * Add a container to a container
+   * 
+   * @param name      Name (Key) of the Container
+   * @param container Container to be added
+   * @return <code>true</code> if container was added successfully,
+   *         <code>false</code> otherwise
+   */
   public boolean addContainer(String name, Container container) {
 
     if (this.containers.keySet().contains(name)) {
@@ -77,6 +106,13 @@ public class Container {
     }
   }
 
+  /**
+   * Remove a container from a container
+   * 
+   * @param name Name (Key) of the Container
+   * @return <code>true</code> if container was removed successfully,
+   *         <code>false</code> otherwise
+   */
   public boolean removeContainer(String name) {
 
     if (this.containers.keySet().contains(name)) {
@@ -87,6 +123,9 @@ public class Container {
     }
   }
 
+  /**
+   * Check if two containers are equal
+   */
   public boolean equals(Object o) {
 
     if (o instanceof Object) {
@@ -140,6 +179,14 @@ public class Container {
     }
   }
 
+  /**
+   * Save a Container to a directory. If the directory already exists, it will
+   * be overwritten
+   * 
+   * @param dir Directory on the hard disk where the container should be created
+   * @return <code>true</code> if container was saved successfully on the drive,
+   *         <code>false</code> otherwise
+   */
   public boolean save(File dir) {
 
     if (dir.exists()) {
@@ -187,14 +234,33 @@ public class Container {
       return true;
 
     } catch (ParserConfigurationException e) {
+      try {
+        FileUtils.deleteDirectory(dir);
+      } catch (IOException e1) {
+      }
       return false;
     } catch (TransformerConfigurationException e) {
+      try {
+        FileUtils.deleteDirectory(dir);
+      } catch (IOException e1) {
+      }
       return false;
     } catch (TransformerException e) {
+      try {
+        FileUtils.deleteDirectory(dir);
+      } catch (IOException e1) {
+      }
       return false;
     }
   }
 
+  /**
+   * Read a container from the hard disk
+   * 
+   * @param dir Directory on the hard disk where the container is saved
+   * @return <code>true</code> if container was read successfully from the
+   *         drive, <code>false</code> otherwise
+   */
   public static Container read(File dir) {
 
     if (dir.isDirectory() && dir.canRead()) {
@@ -243,13 +309,10 @@ public class Container {
           return new Container(containers, properties);
 
         } catch (ParserConfigurationException e) {
-          e.printStackTrace();
           return null;
         } catch (SAXException e) {
-          e.printStackTrace();
           return null;
         } catch (IOException e) {
-          e.printStackTrace();
           return null;
         }
 
@@ -259,10 +322,5 @@ public class Container {
     } else {
       return null;
     }
-  }
-
-  public String toString() {
-    return null;
-
   }
 }

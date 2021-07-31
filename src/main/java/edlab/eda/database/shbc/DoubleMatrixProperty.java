@@ -17,6 +17,10 @@ import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+/**
+ * Double-Matrix Container Property
+ * 
+ */
 public class DoubleMatrixProperty extends MatrixProperty {
 
   static final String TYPE_ID = "double";
@@ -31,6 +35,12 @@ public class DoubleMatrixProperty extends MatrixProperty {
     this.values = values;
   }
 
+  /**
+   * Create a DoubleMatrixProperty from 4-dimensional double array
+   * 
+   * @param data 4-dimensional double array
+   * @return DoubleMatrixProperty
+   */
   public static DoubleMatrixProperty create(double[][][][] data) {
 
     double[] refracturedData = new double[data.length * data[0].length
@@ -53,6 +63,12 @@ public class DoubleMatrixProperty extends MatrixProperty {
         data[0][0].length, data[0][0][0].length }, refracturedData);
   }
 
+  /**
+   * Create a DoubleMatrixProperty from 3-dimensional double array
+   * 
+   * @param data 3-dimensional double array
+   * @return DoubleMatrixProperty
+   */
   public static DoubleMatrixProperty create(double[][][] data) {
 
     double[] refracturedData = new double[data.length * data[0].length
@@ -74,6 +90,12 @@ public class DoubleMatrixProperty extends MatrixProperty {
 
   }
 
+  /**
+   * Create a DoubleMatrixProperty from 2-dimensional double array
+   * 
+   * @param data 2-dimensional double array
+   * @return DoubleMatrixProperty
+   */
   public static DoubleMatrixProperty create(double[][] data) {
 
     double[] refracturedData = new double[data.length * data[0].length];
@@ -88,11 +110,18 @@ public class DoubleMatrixProperty extends MatrixProperty {
         refracturedData);
   }
 
+  /**
+   * Create a DoubleMatrixProperty from 1-dimensional double array
+   * 
+   * @param data 1-dimensional double array
+   * @return DoubleMatrixProperty
+   */
   public static DoubleMatrixProperty create(double[] data) {
 
     return new DoubleMatrixProperty(new int[] { data.length }, data);
   }
 
+  @Override
   Element build(String name, Document document, File file) {
 
     Element element = document.createElement(Container.ENTRY_ID);
@@ -165,8 +194,14 @@ public class DoubleMatrixProperty extends MatrixProperty {
     }
   }
 
-  static DoubleMatrixProperty build(Node node, File file) {
-
+  
+  /**
+   * Create a DoubleMatrixProperty from a XML-Node
+   * @param node XML-Node
+   * @param file Directory where the data is stored
+   * @return DoubleMatrixProperty
+   */
+  static DoubleMatrixProperty build(Node node, File file) { 
     ArrayList<Integer> dims = new ArrayList<>();
 
     NodeList nodeList = node.getChildNodes();
