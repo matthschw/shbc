@@ -53,6 +53,7 @@ public class Demo {
     top.save(file);
 
     // Read container from hard disk
+    @SuppressWarnings("unused")
     Container c = Container.read(file);
   }
 }
