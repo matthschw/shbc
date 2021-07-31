@@ -11,13 +11,10 @@ import java.util.Random;
 import org.apache.commons.io.FileUtils;
 import org.junit.jupiter.api.Test;
 
-import edlab.eda.database.shbc.exceptions.CorruptedContainerException;
-import edlab.eda.database.shbc.exceptions.UnknownTypeException;
-
 public class ContainerTest {
 
   @Test
-  void test() throws FileNotFoundException, CorruptedContainerException, UnknownTypeException {
+  void test() throws FileNotFoundException, CorruptedContainerException, UnknownTypeException, MatrixNotAvailable {
 
     File first = new File("./first");
     File second = new File("./second");

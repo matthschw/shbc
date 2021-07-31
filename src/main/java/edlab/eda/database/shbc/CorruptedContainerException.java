@@ -1,13 +1,13 @@
-package edlab.eda.database.shbc.exceptions;
+package edlab.eda.database.shbc;
 
 import java.io.File;
 
+/**
+ * Exception which is thrown when a a container is corrupted
+ *
+ */
 public class CorruptedContainerException extends Exception {
-
-  /**
-   * 
-   */
-  private static final long serialVersionUID = 1L;
+  static final long serialVersionUID = 1L;
 
   private CorruptedContainerException(String message) {
     super(message);
@@ -22,6 +22,5 @@ public class CorruptedContainerException extends Exception {
     return new CorruptedContainerException(
         "XML @ " + xml.getAbsolutePath() + " is corrupted");
   }
-  
-  
+
 }

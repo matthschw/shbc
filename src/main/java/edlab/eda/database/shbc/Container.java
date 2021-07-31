@@ -26,10 +26,10 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
-import edlab.eda.database.shbc.exceptions.CorruptedContainerException;
-import edlab.eda.database.shbc.exceptions.MatrixNotAvailable;
-import edlab.eda.database.shbc.exceptions.UnknownTypeException;
-
+/**
+ * Container
+ *
+ */
 public class Container {
 
   static final String CONFIG_FILE_NAME = "shbc.xml";
@@ -268,11 +268,11 @@ public class Container {
    *         drive, <code>false</code> otherwise
    * @throws CorruptedContainerException
    * @throws FileNotFoundException
-   * @throws UnknownTypeException 
-   * @throws MatrixNotAvailable 
+   * @throws UnknownTypeException
+   * @throws MatrixNotAvailable
    */
-  public static Container read(File dir)
-      throws CorruptedContainerException, FileNotFoundException, UnknownTypeException, MatrixNotAvailable {
+  public static Container read(File dir) throws CorruptedContainerException,
+      FileNotFoundException, UnknownTypeException, MatrixNotAvailable {
 
     if (dir.isDirectory() && dir.canRead()) {
 
