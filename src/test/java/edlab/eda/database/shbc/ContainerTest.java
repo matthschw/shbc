@@ -61,13 +61,26 @@ public class ContainerTest {
           new NumericProperty(new BigDecimal(rand.nextInt(100000000))));
     }
 
-    DoubleMatrixProperty doubleMatrix1 = DoubleMatrixProperty
-        .create(new double[] { 1.45435, 234.45454 });
+    double[] matrix1 = new double[rand.nextInt(100) + 1];
+
+    for (int i = 0; i < matrix1.length; i++) {
+      matrix1[i] = rand.nextDouble();
+    }
+
+    DoubleMatrixProperty doubleMatrix1 = DoubleMatrixProperty.create(matrix1);
 
     level2_2.addProperty("matrix1", doubleMatrix1);
 
-    DoubleMatrixProperty doubleMatrix2 = DoubleMatrixProperty
-        .create(new double[][] { { 1.0, 2.0 }, { 3.0, 5.6 } });
+    double[][] matrix2 = new double[rand.nextInt(100) + 1][rand.nextInt(100)
+        + 1];
+
+    for (int i = 0; i < matrix2.length; i++) {
+      for (int j = 0; j < matrix2[0].length; j++) {
+        matrix2[i][j] = rand.nextDouble();
+      }
+    }
+
+    DoubleMatrixProperty doubleMatrix2 = DoubleMatrixProperty.create(matrix2);
 
     level2_2.addProperty("matrix2", doubleMatrix2);
 
@@ -85,6 +98,23 @@ public class ContainerTest {
     DoubleMatrixProperty doubleMatrix3 = DoubleMatrixProperty.create(matrix3);
 
     level2_2.addProperty("matrix3", doubleMatrix3);
+
+    double[][][][] matrix4 = new double[rand.nextInt(100) + 1][rand.nextInt(100)
+        + 1][rand.nextInt(100) + 1][rand.nextInt(100) + 1];
+
+    for (int i = 0; i < matrix4.length; i++) {
+      for (int j = 0; j < matrix4[0].length; j++) {
+        for (int k = 0; k < matrix4[0][0].length; k++) {
+          for (int l = 0; l < matrix4[0][0][0].length; l++) {
+            matrix4[i][j][k][l] = rand.nextDouble();
+          }
+        }
+      }
+    }
+
+    DoubleMatrixProperty doubleMatrix4 = DoubleMatrixProperty.create(matrix4);
+
+    level2_2.addProperty("matrix4", doubleMatrix4);
 
     level2_2.addProperty("randomNumbers", list);
     level1.addContainer("randomNumbers", level2_2);

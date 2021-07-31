@@ -31,6 +31,28 @@ public class DoubleMatrixProperty extends MatrixProperty {
     this.values = values;
   }
 
+  public static DoubleMatrixProperty create(double[][][][] data) {
+
+    double[] refracturedData = new double[data.length * data[0].length
+        * data[0][0].length * data[0][0][0].length];
+
+    for (int i = 0; i < data.length; i++) {
+      for (int j = 0; j < data[0].length; j++) {
+        for (int k = 0; k < data[0][0].length; k++) {
+          for (int l = 0; l < data[0][0][0].length; l++) {
+
+            refracturedData[i * data[0][0][0].length * data[0][0].length
+                * data[0].length + data[0][0][0].length * data[0][0].length * j
+                + data[0][0][0].length * k + l] = data[i][j][k][l];
+          }
+        }
+      }
+    }
+
+    return new DoubleMatrixProperty(new int[] { data.length, data[0].length,
+        data[0][0].length, data[0][0][0].length }, refracturedData);
+  }
+
   public static DoubleMatrixProperty create(double[][][] data) {
 
     double[] refracturedData = new double[data.length * data[0].length
@@ -39,7 +61,7 @@ public class DoubleMatrixProperty extends MatrixProperty {
     for (int i = 0; i < data.length; i++) {
       for (int j = 0; j < data[0].length; j++) {
         for (int k = 0; k < data[0][0].length; k++) {
-          
+
           refracturedData[i * data[0][0].length * data[0].length
               + data[0][0].length * j + k] = data[i][j][k];
         }
@@ -112,7 +134,6 @@ public class DoubleMatrixProperty extends MatrixProperty {
     }
 
     return null;
-
   }
 
   @Override
