@@ -1,7 +1,6 @@
 # shbc
-[![Java CI with Maven](https://github.com/matthschw/shbc/actions/workflows/maven.yml/badge.svg)](https://github.com/matthschw/shbc/actions/workflows/maven.yml)
-
 Simple Hierarchical Binary Container
+[![Java CI with Maven](https://github.com/matthschw/shbc/actions/workflows/maven.yml/badge.svg)](https://github.com/matthschw/shbc/actions/workflows/maven.yml)
 
 # Installation
 
