@@ -73,9 +73,12 @@ public class ContainerTest {
     if (!level1.equals(level1_copy)) {
       fail("Unqueal container");
     }
-    /*
-     * try { FileUtils.deleteDirectory(first); } catch (IOException e) { }
-     */
+
+    try {
+      FileUtils.deleteDirectory(first);
+    } catch (IOException e) {
+    }
+
     try {
       FileUtils.deleteDirectory(second);
     } catch (IOException e) {

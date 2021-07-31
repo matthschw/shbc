@@ -31,6 +31,7 @@ public abstract class SimpleProperty extends Property {
       return PropertyList.build(node, dir);
 
     }
+    
     return null;
   }
 }

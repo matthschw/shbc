@@ -14,7 +14,7 @@ public class PropertyList extends SimpleProperty
     implements Iterable<SimpleProperty> {
 
   static final String TYPE_ID = "list";
-  static final String ENTRY_ID = "entry";
+ 
 
   private ArrayList<SimpleProperty> properties;
 
@@ -49,7 +49,7 @@ public class PropertyList extends SimpleProperty
   public Iterator<SimpleProperty> iterator() {
     return properties.iterator();
   }
-  
+
   @Override
   public boolean equals(Object o) {
 
@@ -59,7 +59,6 @@ public class PropertyList extends SimpleProperty
       if (this.properties.size() != propertyList.properties.size()) {
         return false;
       }
-      
 
       for (int i = 0; i < this.properties.size(); i++) {
 
@@ -78,11 +77,16 @@ public class PropertyList extends SimpleProperty
   @Override
   Element build(String name, Document document) {
 
-    Element element = document.createElement(name);
+    Element element = document.createElement(Container.ENTRY_ID);
+
+    if (name != null) {
+      element.setAttribute(Container.NAME_ID, name);
+    }
+
     element.setAttribute(Container.TYPE_ID, TYPE_ID);
 
     for (SimpleProperty simpleProperty : this.properties) {
-      element.appendChild(simpleProperty.build(ENTRY_ID, document));
+      element.appendChild(simpleProperty.build(Container.ENTRY_ID, document));
     }
 
     return element;

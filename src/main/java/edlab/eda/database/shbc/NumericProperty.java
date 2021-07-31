@@ -36,8 +36,15 @@ public class NumericProperty extends SimpleProperty {
 
   @Override
   Element build(String name, Document document) {
-    Element element = document.createElement(name);
+
+    Element element = document.createElement(Container.ENTRY_ID);
+
+    if (name != null) {
+      element.setAttribute(Container.NAME_ID, name);
+    }
+    
     element.setAttribute(Container.TYPE_ID, TYPE_ID);
+
     element.setTextContent(this.property.toString());
     return element;
   }

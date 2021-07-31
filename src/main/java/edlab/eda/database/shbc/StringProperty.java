@@ -26,9 +26,11 @@ public class StringProperty extends SimpleProperty {
   public boolean equals(Object o) {
 
     if (o instanceof StringProperty) {
-      StringProperty stringProperty = (StringProperty) o;
       
+      StringProperty stringProperty = (StringProperty) o;
+
       return stringProperty.property.equals(this.property);
+      
     } else {
 
       return false;
@@ -37,8 +39,15 @@ public class StringProperty extends SimpleProperty {
 
   @Override
   Element build(String name, Document document) {
-    Element element = document.createElement(name);
+
+    Element element = document.createElement(Container.ENTRY_ID);
+
+    if (name != null) {
+      element.setAttribute(Container.NAME_ID, name);
+    }
+
     element.setAttribute(Container.TYPE_ID, TYPE_ID);
+
     element.setTextContent(this.property);
     return element;
   }

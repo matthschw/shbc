@@ -28,6 +28,8 @@ public class Container {
 
   static final String CONFIG_FILE_NAME = "shbc.xml";
   static final String TYPE_ID = "type";
+  static final String NAME_ID = "name";
+  static final String ENTRY_ID = "entry";
 
   static final String INT_ID = "string";
 
@@ -94,38 +96,38 @@ public class Container {
       if (this.properties.size() != container.properties.size()) {
         return false;
       }
-      
+
       for (String key : this.properties.keySet()) {
 
         if (container.properties.containsKey(key)) {
-         
+
           if (!container.properties.get(key).equals(this.properties.get(key))) {
-            
+
             return false;
           }
 
         } else {
-          
+
           return false;
         }
       }
-      
+
       if (this.containers.size() != container.containers.size()) {
-        
+
         return false;
       }
 
       for (String key : this.containers.keySet()) {
 
         if (container.containers.containsKey(key)) {
-               
+
           if (!container.containers.get(key).equals(this.containers.get(key))) {
-            
+
             return false;
           }
 
         } else {
-          
+
           return false;
         }
       }
@@ -133,7 +135,7 @@ public class Container {
       return true;
 
     } else {
-      
+
       return false;
     }
   }
@@ -224,9 +226,11 @@ public class Container {
 
             map = node.getAttributes();
 
-            if (map != null && map.getNamedItem(TYPE_ID) != null) {
+            if (map != null && map.getNamedItem(TYPE_ID) != null
+                && map.getNamedItem(NAME_ID) != null) {
 
-              properties.put(node.getNodeName(), Property.build(node, dir));
+              properties.put(map.getNamedItem(NAME_ID).getTextContent(),
+                  Property.build(node, dir));
             }
           }
 
