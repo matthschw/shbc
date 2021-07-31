@@ -1,1 +1,1 @@
-packageSearchIndex = [{"l":"All Packages","url":"allpackages-index.html"},{"l":"edlab.eda.database.shbc"}]
+packageSearchIndex = [{"l":"All Packages","url":"allpackages-index.html"},{"l":"edlab.eda.database.shbc"},{"l":"edlab.eda.database.shbc.exceptions"}]
