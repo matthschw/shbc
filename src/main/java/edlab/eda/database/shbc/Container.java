@@ -27,6 +27,7 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 import edlab.eda.database.shbc.exceptions.CorruptedContainerException;
+import edlab.eda.database.shbc.exceptions.MatrixNotAvailable;
 import edlab.eda.database.shbc.exceptions.UnknownTypeException;
 
 public class Container {
@@ -268,9 +269,10 @@ public class Container {
    * @throws CorruptedContainerException
    * @throws FileNotFoundException
    * @throws UnknownTypeException 
+   * @throws MatrixNotAvailable 
    */
   public static Container read(File dir)
-      throws CorruptedContainerException, FileNotFoundException, UnknownTypeException {
+      throws CorruptedContainerException, FileNotFoundException, UnknownTypeException, MatrixNotAvailable {
 
     if (dir.isDirectory() && dir.canRead()) {
 

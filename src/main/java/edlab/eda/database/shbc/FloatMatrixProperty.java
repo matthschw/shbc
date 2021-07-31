@@ -10,12 +10,13 @@ import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
 
-import org.w3c.dom.DOMException;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+
+import edlab.eda.database.shbc.exceptions.MatrixNotAvailable;
 
 /**
  * Float-Matrix Container Property
@@ -307,8 +308,9 @@ public class FloatMatrixProperty extends MatrixProperty {
    * @param node XML-Node
    * @param file Directory where the data is stored
    * @return DoubleMatrixProperty
+   * @throws MatrixNotAvailable
    */
-  static FloatMatrixProperty build(Node node, File file) {
+  static FloatMatrixProperty build(Node node, File file) throws MatrixNotAvailable {
     ArrayList<Integer> dims = new ArrayList<>();
 
     NodeList nodeList = node.getChildNodes();
@@ -340,23 +342,17 @@ public class FloatMatrixProperty extends MatrixProperty {
     byte[] bytes = new byte[values.length * Float.BYTES];
 
     DataInputStream stream;
+
+    File matrix = new File(file,
+        map.getNamedItem(Container.NAME_ID).getTextContent());
+
     try {
-      stream = new DataInputStream(new FileInputStream(new File(file,
-          map.getNamedItem(Container.NAME_ID).getTextContent())));
-      try {
-        stream.read(bytes);
-      } catch (IOException e) {
-        // TODO Auto-generated catch block
-        e.printStackTrace();
-      }
+      stream = new DataInputStream(new FileInputStream(matrix));
+      stream.read(bytes);
       stream.close();
 
-    } catch (FileNotFoundException e) {
-
-    } catch (DOMException e) {
-
-    } catch (IOException e) {
-
+    } catch (Exception e) {
+      throw new MatrixNotAvailable(matrix);
     }
 
     for (int i = 0; i < values.length; i++) {

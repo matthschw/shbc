@@ -5,12 +5,13 @@ import java.io.FileNotFoundException;
 import java.math.BigDecimal;
 
 import edlab.eda.database.shbc.exceptions.CorruptedContainerException;
+import edlab.eda.database.shbc.exceptions.MatrixNotAvailable;
 import edlab.eda.database.shbc.exceptions.UnknownTypeException;
 
 public class Demo {
 
   public static void main(String[] args) throws FileNotFoundException,
-      CorruptedContainerException, UnknownTypeException {
+      CorruptedContainerException, UnknownTypeException, MatrixNotAvailable {
 
     // Create a new container
     Container top = new Container();

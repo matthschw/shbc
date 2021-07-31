@@ -7,6 +7,7 @@ import org.w3c.dom.Element;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 
+import edlab.eda.database.shbc.exceptions.MatrixNotAvailable;
 import edlab.eda.database.shbc.exceptions.UnknownTypeException;
 
 /**
@@ -38,7 +39,8 @@ abstract public class Property {
    * @return Container Property
    * @throws UnknownTypeException
    */
-  static Property build(Node node, File dir) throws UnknownTypeException {
+  static Property build(Node node, File dir)
+      throws UnknownTypeException, MatrixNotAvailable {
 
     NamedNodeMap map = node.getAttributes();
 
