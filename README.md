@@ -40,8 +40,7 @@ is stored on the Github-Pages (branch *gh-pages*).
 
 ```java
 // Create a new Container
-NutReader reader = NutReader
-    .getNutasciiReader("./src/test/java/resources/rc/nutascii.raw");
+
 
 ```
 

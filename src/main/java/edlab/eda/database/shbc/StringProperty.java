@@ -4,10 +4,11 @@ import java.io.File;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.Node;
 
 public class StringProperty extends SimpleProperty {
 
-  public static final String TYPE_ID = "string";
+  static final String TYPE_ID = "string";
   private String property;
 
   public StringProperty(String property) {
@@ -22,19 +23,20 @@ public class StringProperty extends SimpleProperty {
     return this.property.toString();
   }
 
-  public boolean equal(Object o) {
+  public boolean equals(Object o) {
 
     if (o instanceof StringProperty) {
       StringProperty stringProperty = (StringProperty) o;
+      
       return stringProperty.property.equals(this.property);
     } else {
+
       return false;
     }
   }
 
   @Override
   Element build(String name, Document document) {
-    
     Element element = document.createElement(name);
     element.setAttribute(Container.TYPE_ID, TYPE_ID);
     element.setTextContent(this.property);
@@ -46,4 +48,7 @@ public class StringProperty extends SimpleProperty {
     return build(name, document);
   }
 
+  static SimpleProperty build(Node node, File file) {
+    return new StringProperty(node.getTextContent());
+  }
 }

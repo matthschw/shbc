@@ -5,10 +5,11 @@ import java.math.BigDecimal;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.Node;
 
 public class NumericProperty extends SimpleProperty {
 
-  public static final String TYPE_ID = "numeric";
+  static final String TYPE_ID = "numeric";
   private BigDecimal property;
 
   public NumericProperty(BigDecimal property) {
@@ -23,7 +24,7 @@ public class NumericProperty extends SimpleProperty {
     return this.property.toString();
   }
 
-  public boolean equal(Object o) {
+  public boolean equals(Object o) {
 
     if (o instanceof NumericProperty) {
       NumericProperty numericProperty = (NumericProperty) o;
@@ -44,5 +45,10 @@ public class NumericProperty extends SimpleProperty {
   @Override
   Element build(String name, Document document, File file) {
     return build(name, document);
+  }
+
+  static SimpleProperty build(Node node, File file) {
+    // TODO Auto-generated method stub
+    return new NumericProperty(new BigDecimal(node.getTextContent()));
   }
 }

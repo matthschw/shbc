@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<container>
+<firstName type="string">John</firstName>
+<lastName type="string">Doe</lastName>
+<birth type="list">
+<entry type="numeric">1</entry>
+<entry type="numeric">9</entry>
+<entry type="numeric">1975</entry>
+</birth>
+<height type="numeric">181</height>
+</container>
