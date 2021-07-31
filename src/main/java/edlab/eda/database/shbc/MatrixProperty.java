@@ -1,19 +1,18 @@
 package edlab.eda.database.shbc;
 
 public abstract class MatrixProperty extends ComplexProperty {
-
+  
+  static final String DIM_ID = "dim";
   protected int[] dimensions;
-  protected int[] scalings;
-  protected SimpleProperty[] names;
+  protected int[] scalings = null;
 
-  public MatrixProperty(int[] dimensions, SimpleProperty[] names) {
+  public MatrixProperty(int[] dimensions) {
 
     this.dimensions = dimensions;
-    this.names = names;
-
-    this.scalings = new int[dimensions.length - 1];
 
     if (dimensions.length > 1) {
+
+      this.scalings = new int[dimensions.length - 1];
 
       this.scalings[0] = 1;
 
@@ -22,6 +21,26 @@ public abstract class MatrixProperty extends ComplexProperty {
       }
     }
   }
-  
-  
+
+  public int getDimenions() {
+    return dimensions.length;
+  }
+
+  int getDatabaseIndex(int[] indices) {
+
+    if (this.dimensions.length == indices.length) {
+
+      int index = 0;
+
+      for (int i = 0; i < indices.length; i++) {
+        index += indices[i] * scalings[i];
+      }
+
+      return index;
+
+    } else {
+      return -1;
+    }
+  }
+
 }

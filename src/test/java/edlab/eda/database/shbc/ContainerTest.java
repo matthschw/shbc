@@ -61,6 +61,31 @@ public class ContainerTest {
           new NumericProperty(new BigDecimal(rand.nextInt(100000000))));
     }
 
+    DoubleMatrixProperty doubleMatrix1 = DoubleMatrixProperty
+        .create(new double[] { 1.45435, 234.45454 });
+
+    level2_2.addProperty("matrix1", doubleMatrix1);
+
+    DoubleMatrixProperty doubleMatrix2 = DoubleMatrixProperty
+        .create(new double[][] { { 1.0, 2.0 }, { 3.0, 5.6 } });
+
+    level2_2.addProperty("matrix2", doubleMatrix2);
+
+    double[][][] matrix3 = new double[rand.nextInt(100) + 1][rand.nextInt(100)
+        + 1][rand.nextInt(100) + 1];
+
+    for (int i = 0; i < matrix3.length; i++) {
+      for (int j = 0; j < matrix3[0].length; j++) {
+        for (int k = 0; k < matrix3[0][0].length; k++) {
+          matrix3[i][j][k] = rand.nextDouble();
+        }
+      }
+    }
+
+    DoubleMatrixProperty doubleMatrix3 = DoubleMatrixProperty.create(matrix3);
+
+    level2_2.addProperty("matrix3", doubleMatrix3);
+
     level2_2.addProperty("randomNumbers", list);
     level1.addContainer("randomNumbers", level2_2);
 
@@ -83,6 +108,5 @@ public class ContainerTest {
       FileUtils.deleteDirectory(second);
     } catch (IOException e) {
     }
-
   }
 }

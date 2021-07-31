@@ -27,6 +27,11 @@ abstract public class Property {
 
         return SimpleProperty.build(node, dir);
       }
+      
+      if (type.equals(DoubleMatrixProperty.TYPE_ID)) {
+
+        return DoubleMatrixProperty.build(node, dir);
+      }
     }
 
     return null;
