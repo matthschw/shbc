@@ -55,6 +55,10 @@ public abstract class SimpleProperty extends Property {
 
       return PropertyList.build(node, dir);
 
+    case BooleanProperty.TYPE_ID:
+
+      return BooleanProperty.build(node, dir);
+
     }
 
     return null;

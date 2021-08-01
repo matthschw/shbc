@@ -14,7 +14,8 @@ import org.junit.jupiter.api.Test;
 public class Container1Test {
 
   @Test
-  void test() throws FileNotFoundException, CorruptedContainerException, UnknownTypeException, MatrixNotAvailable {
+  void test() throws FileNotFoundException, CorruptedContainerException,
+      UnknownTypeException, MatrixNotAvailable {
 
     File first = new File("./first");
     File second = new File("./second");
@@ -25,6 +26,8 @@ public class Container1Test {
     level1.addProperty("lastName", new StringProperty("Doe"));
 
     level1.addProperty("height", new NumericProperty(new BigDecimal("181")));
+
+    level1.addProperty("bool", new BooleanProperty(true));
 
     PropertyList list = new PropertyList();
 

@@ -47,7 +47,8 @@ abstract public class Property {
 
       if (type.equals(StringProperty.TYPE_ID)
           || type.equals(NumericProperty.TYPE_ID)
-          || type.equals(PropertyList.TYPE_ID)) {
+          || type.equals(PropertyList.TYPE_ID)
+          || type.equals(BooleanProperty.TYPE_ID)) {
 
         return SimpleProperty.build(node, dir);
       }
