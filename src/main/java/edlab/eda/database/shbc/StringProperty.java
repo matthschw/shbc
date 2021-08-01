@@ -17,7 +17,7 @@ public class StringProperty extends SimpleProperty {
   /**
    * Create a StringProperty
    * 
-   * @param property StringProperty
+   * @param property Property value
    */
   public StringProperty(String property) {
     this.property = property;

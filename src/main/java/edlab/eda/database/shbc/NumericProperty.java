@@ -18,7 +18,7 @@ public class NumericProperty extends SimpleProperty {
   /**
    * Create a NumericProperty
    * 
-   * @param property NumericProperty
+   * @param property Property value
    */
   public NumericProperty(BigDecimal property) {
     this.property = property;

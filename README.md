@@ -2,7 +2,19 @@
 
 [![Java CI with Maven](https://github.com/matthschw/shbc/actions/workflows/maven.yml/badge.svg)](https://github.com/matthschw/shbc/actions/workflows/maven.yml)
 
-Simple Hierarchical Binary Container
+
+The SHBC (Simple Hierarchical Binary Container) is a possibility to
+store and read
+
+- Numeric Properties
+- String Properties
+- Boolean Properties
+- List of Properties
+- Float-Matrices
+- Double-Matrices
+
+from and to the hard-disk.
+The matrices are stored as binary, the other values are stored in a XML.
 
 # Installation
 
@@ -83,6 +95,12 @@ top.save(file);
 // Read container from hard disk
 Container c = Container.read(file);
 ```
+# TODO
+
+- [ ] Adding Property Sets
+- [ ] Adding Property Maps
+
+
 ## License
 
 Copyright (C) 2021, [Electronics & Drives](https://www.electronics-and-drives.de/)

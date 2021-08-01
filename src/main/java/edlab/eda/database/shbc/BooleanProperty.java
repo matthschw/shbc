@@ -6,6 +6,10 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 
+/**
+ * Boolean Container Property
+ *
+ */
 public class BooleanProperty extends SimpleProperty {
 
   static final String TYPE_ID = "bool";
@@ -14,10 +18,20 @@ public class BooleanProperty extends SimpleProperty {
 
   private boolean property;
 
+  /**
+   * Create a BooleanProperty
+   * 
+   * @param property Property value
+   */
   public BooleanProperty(boolean property) {
     this.property = property;
   }
 
+  /**
+   * Get boolean property
+   * 
+   * @return property
+   */
   public boolean getValue() {
     return this.property;
   }
