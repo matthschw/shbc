@@ -11,7 +11,7 @@ import java.util.Random;
 import org.apache.commons.io.FileUtils;
 import org.junit.jupiter.api.Test;
 
-public class ContainerTest {
+public class Container1Test {
 
   @Test
   void test() throws FileNotFoundException, CorruptedContainerException, UnknownTypeException, MatrixNotAvailable {

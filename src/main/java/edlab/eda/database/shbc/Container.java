@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -95,6 +96,43 @@ public class Container {
   }
 
   /**
+   * Get a set with all property-names
+   * 
+   * @return Set of all property-names
+   */
+  public Set<String> getProperties() {
+    return this.properties.keySet();
+  }
+
+  /**
+   * Check if a property with a given name is in the container
+   * 
+   * @param name Name of the property
+   * @return <code>true</code> if property is in the container,
+   *         <code>false</code> otherwise
+   */
+  public boolean hasProperty(String name) {
+    return this.properties.keySet().contains(name);
+  }
+
+  /**
+   * Check if a container with a given name is in the container
+   * 
+   * @param property Property
+   * @return <code>true</code> if container is in the container,
+   *         <code>false</code> otherwise
+   */
+  public boolean hasProperty(Property property) {
+
+    for (String key : this.properties.keySet()) {
+      if (this.properties.get(key).equals(property)) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  /**
    * Add a container to a container
    * 
    * @param name      Name (Key) of the Container
@@ -104,7 +142,9 @@ public class Container {
    */
   public boolean addContainer(String name, Container container) {
 
-    if (this.containers.keySet().contains(name)) {
+    if (this.containers.keySet().contains(name)
+        || this.hasContainerHierarchical(container)
+        || container.hasContainerHierarchical(this)) {
       return false;
     } else {
       this.containers.put(name, container);
@@ -127,6 +167,61 @@ public class Container {
     } else {
       return false;
     }
+  }
+
+  /**
+   * Get a set with all container-names
+   * 
+   * @return Set of all container-names
+   */
+  public Set<String> getContainer() {
+    return this.properties.keySet();
+  }
+
+  /**
+   * Check if a container with a given name is in the container
+   * 
+   * @param name Name of the container
+   * @return <code>true</code> if container is in the container,
+   *         <code>false</code> otherwise
+   */
+  public boolean hasContainer(String name) {
+    return this.properties.keySet().contains(name);
+  }
+
+  /**
+   * Check if a container with a given name is in the container
+   * 
+   * @param container Container
+   * @return <code>true</code> if container is in the container,
+   *         <code>false</code> otherwise
+   */
+  public boolean hasContainer(Container container) {
+
+    for (String key : this.containers.keySet()) {
+      if (this.containers.get(key).equals(container)) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  /**
+   * Check if a container is already added to container or in a sub-container.
+   * 
+   * @param container Container to be checked
+   * @return <code>true</code> if container is in the container,
+   *         <code>false</code> otherwise
+   */
+  private boolean hasContainerHierarchical(Container container) {
+
+    for (String key : this.containers.keySet()) {
+      if (this.containers.get(key).equals(container)
+          || this.containers.get(key).hasContainerHierarchical(container)) {
+        return true;
+      }
+    }
+    return false;
   }
 
   /**
