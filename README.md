@@ -98,7 +98,7 @@ Container c = Container.read(file);
 # TODO
 
 - [ ] Adding Property Sets
-- [ ] Adding Property Maps
+- [x] Adding Property Maps
 
 
 ## License

@@ -48,13 +48,13 @@ abstract public class Property {
       if (type.equals(StringProperty.TYPE_ID)
           || type.equals(NumericProperty.TYPE_ID)
           || type.equals(PropertyList.TYPE_ID)
-          || type.equals(BooleanProperty.TYPE_ID)) {
+          || type.equals(BooleanProperty.TYPE_ID)
+          || type.equals(PropertyMap.TYPE_ID)) {
 
         return SimpleProperty.build(node, dir);
       }
 
       if (type.equals(DoubleMatrixProperty.TYPE_ID)) {
-
         return DoubleMatrixProperty.build(node, dir);
       }
 

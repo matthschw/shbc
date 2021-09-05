@@ -54,6 +54,13 @@ public class Container1Test {
 
     level1.addContainer("wife", level2_1);
 
+    // create an attach map
+    PropertyMap map = new PropertyMap();
+    map.put("a", new StringProperty("xx"));
+    map.put("b", new StringProperty("yy"));
+
+    level1.addProperty("map", map);
+
     Container level2_2 = new Container();
 
     list = new PropertyList();

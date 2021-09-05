@@ -42,7 +42,13 @@ public class Demo {
 
     // Add a container to another container
     top.addContainer("sub", sub);
-
+    
+    PropertyMap map = new PropertyMap();
+    map.put("a", new StringProperty("xx"));
+    map.put("b", new StringProperty("yy"));
+    
+    top.addProperty("map", map);
+    
     File file = new File("./container");
 
     // Save container to hard disk

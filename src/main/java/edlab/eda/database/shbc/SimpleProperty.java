@@ -40,7 +40,7 @@ public abstract class SimpleProperty extends Property {
   static SimpleProperty build(Node node, File dir) {
 
     NamedNodeMap map = node.getAttributes();
-
+    
     switch (map.getNamedItem(Container.TYPE_ID).getNodeValue()) {
 
     case StringProperty.TYPE_ID:
@@ -56,8 +56,10 @@ public abstract class SimpleProperty extends Property {
       return PropertyList.build(node, dir);
 
     case BooleanProperty.TYPE_ID:
-
       return BooleanProperty.build(node, dir);
+      
+    case PropertyMap.TYPE_ID:
+      return PropertyMap.build(node, dir);
 
     }
 

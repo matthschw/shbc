@@ -22,5 +22,4 @@ public class CorruptedContainerException extends Exception {
     return new CorruptedContainerException(
         "XML @ " + xml.getAbsolutePath() + " is corrupted");
   }
-
 }
